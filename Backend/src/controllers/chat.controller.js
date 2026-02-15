@@ -65,7 +65,7 @@ const handleChat = asyncHandler(async (req, res) => {
     const formattedHistory = history.reverse().map(m => ({ role: m.role, content: m.content }));
 
     // 6. Build Prompt with Context
-    const systemPrompt = `You are a helpful College Assistant for AMTICS (Ahir Polytechnic). Use the following context to answer the student's question accurately. If you don't know the answer based on the context, say you don't know based on available info.
+    const systemPrompt = `You are a helpful College Assistant for AMTICS (Asha M Tarsadia Institute of Computer Science). Use the following context to answer the student's question accurately. If you don't know the answer based on the context, say you don't know based on available info.
   
   Context:
   ${context}`;

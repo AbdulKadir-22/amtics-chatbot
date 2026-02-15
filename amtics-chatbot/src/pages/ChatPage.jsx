@@ -14,14 +14,22 @@ const ChatPage = ({ user }) => {
     const lastLoadedId = useRef(null);
 
     useEffect(() => {
-        if (id && id !== lastLoadedId.current) {
-            loadChat(id);
-            lastLoadedId.current = id;
-            lastInternalId.current = id;
-        } else if (!id) {
+        if (id) {
+            // Only load if it's a different ID than what's already loaded
+            if (id !== lastLoadedId.current) {
+                loadChat(id);
+                lastLoadedId.current = id;
+                lastInternalId.current = id;
+            }
+        } else {
+            // We are at "/" - This is a New Chat
             startNewChat();
+            // IMPORTANT: Reset this so we know we start fresh for loading
             lastLoadedId.current = null;
-            lastInternalId.current = null;
+            // Note: We DON'T reset lastInternalId.current here. 
+            // This prevents the redirect useEffect from triggering because 
+            // internalChatId will still match lastInternalId until startNewChat (async) 
+            // finishes and sets internalChatId to null.
         }
     }, [id, loadChat, startNewChat]);
 
@@ -40,7 +48,7 @@ const ChatPage = ({ user }) => {
             <ChatWindow messages={messages} isTyping={isTyping} />
             <div className="p-4 md:p-6 bg-[#F8FAFC]">
                 <div className="max-w-4xl mx-auto space-y-4">
-                    <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+                    {/* <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
                         {mockSuggestions.map((suggestion, idx) => (
                             <SuggestionChip
                                 key={idx}
@@ -48,7 +56,7 @@ const ChatPage = ({ user }) => {
                                 onClick={sendMessage}
                             />
                         ))}
-                    </div>
+                    </div> */}
                     <ChatInput onSend={sendMessage} />
                     <p className="text-center text-[10px] text-slate-400 font-medium">
                         AI can make mistakes. Please verify important academic deadlines.
