@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, ArrowRight, Loader2 } from 'lucide-react';
 import Button from './Button';
+import api from '../../api/api';
 
 const AuthModal = ({ onVerify }) => {
     const [email, setEmail] = useState('');
@@ -18,13 +19,7 @@ const AuthModal = ({ onVerify }) => {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:5000/api/auth/verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email.toLowerCase() }),
-            });
-
-            const data = await response.json();
+            const data = await api.post('/auth/verify', { email: email.toLowerCase() });
 
             if (data.success) {
                 onVerify(data.user);
@@ -32,7 +27,7 @@ const AuthModal = ({ onVerify }) => {
                 setError(data.message || 'Verification failed');
             }
         } catch (err) {
-            setError('Could not connect to server. Please ensure backend is running.');
+            setError(err.message || 'Could not connect to server. Please ensure backend is running.');
         } finally {
             setLoading(false);
         }

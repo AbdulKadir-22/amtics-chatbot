@@ -1,7 +1,28 @@
 import axios from 'axios';
 
+const getBaseURL = () => {
+    let url = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+    // Ensure URL doesn't end with a slash to avoid double slashes in requests
+    url = url.replace(/\/$/, '');
+
+    // Common mistake check: if the user provided the domain but forgot /api
+    if (!url.endsWith('/api') && !url.includes('/api/')) {
+        // Only append if it looks like a base domain (heuristic)
+        if (url.includes('render.com') || url.includes('localhost')) {
+            url += '/api';
+        }
+    }
+
+    if (import.meta.env.MODE === 'development' || !import.meta.env.VITE_API_URL) {
+        console.log(`[API Config]: Using baseURL -> ${url}`);
+    }
+
+    return url;
+};
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+    baseURL: getBaseURL(),
     headers: {
         'Content-Type': 'application/json',
     },
