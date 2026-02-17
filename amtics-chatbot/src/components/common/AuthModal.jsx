@@ -44,7 +44,7 @@ const AuthModal = ({ onVerify }) => {
                     </div>
 
                     <div>
-                        <h2 className="text-2xl font-bold text-slate-800">Welcome to AcademiaBot</h2>
+                        <h2 className="text-2xl font-bold text-slate-800">Welcome to Amtics Bot</h2>
                         <p className="text-slate-500 mt-2">Enter your college email to get started</p>
                     </div>
 

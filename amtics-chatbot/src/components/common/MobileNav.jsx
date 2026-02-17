@@ -9,7 +9,7 @@ const MobileNav = ({ onMenuClick }) => {
                     <LayoutGrid size={18} className="text-white" />
                 </div>
                 <span className="font-bold text-lg tracking-tight">
-                    Academia<span className="font-light text-blue-400/80">Bot</span>
+                    Amtics<span className="font-light text-blue-400/80"> AI</span>
                 </span>
             </div>
 

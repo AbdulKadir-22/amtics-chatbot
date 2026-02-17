@@ -20,13 +20,13 @@ const KnowledgeCard = ({ source }) => {
                         <BookOpen size={24} />
                     </div>
                     <div>
-                        <h3 className="font-bold text-slate-800">{source.title}</h3>
+                        <h3 className="font-bold text-slate-800">{source.name}</h3>
                         <p className="text-[10px] text-slate-400 font-medium uppercase tracking-tight">Connected to Department Database</p>
                     </div>
                 </div>
 
                 <p className="text-sm text-slate-500 mb-6 leading-relaxed">
-                    {source.desc}
+                    {source.description}
                 </p>
 
                 <div className="flex gap-6">
@@ -51,8 +51,8 @@ const KnowledgeCard = ({ source }) => {
             <div className="w-10 h-10 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform">
                 <BookOpen size={20} />
             </div>
-            <h3 className="font-bold text-slate-800 text-sm mb-2">{source.title}</h3>
-            <p className="text-[11px] text-slate-500 mb-4 leading-relaxed line-clamp-2">{source.desc}</p>
+            <h3 className="font-bold text-slate-800 text-sm mb-2">{source.name}</h3>
+            <p className="text-[11px] text-slate-500 mb-4 leading-relaxed line-clamp-2">{source.description}</p>
             <div className="flex items-center gap-1 text-[10px] text-slate-400 font-medium">
                 <RefreshCcw size={10} className="animate-spin-slow" /> Last synced: {source.sync}
             </div>
